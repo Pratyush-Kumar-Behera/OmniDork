@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OmniDork - The professional OSINT search engine. Build advanced dorks for Google, Bing, and DuckDuckGo to uncover sensitive files, exposed panels, and vulnerabilities.">
+  <title>OmniDork - Advanced OSINT & Multi-Engine Dorking Tool</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+
+<body>
+  <!-- Header with Mode Toggle -->
+  <!-- Header with Mode Toggle -->
+  <!-- Liquid Glass Navbar (Split Design) -->
+  <nav class="liquid-nav">
+    <!-- Brand Pill -->
+    <div class="nav-pill">
+      <div class="nav-pill-content">
+        <img src="./assets/images/logo.png" alt="OmniDork Logo" class="nav-logo" style="height: 28px; width: auto;">
+        <h1 class="nav-brand-text">OmniDork <span style="opacity: 0.5; font-weight: 400;">OSINT Tool</span></h1>
+      </div>
+    </div>
+
+    <!-- Controls Pill -->
+    <div class="nav-pill">
+      <div class="mode-toggle-group" style="display: flex; align-items: center; gap: 8px;">
+        <span id="modeLabel" class="mode-label"
+          style="font-size: 0.75rem; color: var(--color-text-secondary);">Normal</span>
+        <label class="mode-toggle" tabindex="0" role="button" aria-label="Toggle Pro Mode">
+          <input type="checkbox" id="modeSwitch">
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="mode-label pro"
+          style="font-size: 0.75rem; color: var(--color-primary); font-weight: 600;">Pro</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Normal Mode -->
+      <div id="normalMode" class="mode-content">
+        <div style="max-width: 800px; margin: 0 auto;">
+
+          <!-- Hero -->
+          <div class="text-center mb-6">
+            <h1 class="hero-title">OmniDork Builder</h1>
+            <p class="hero-subtitle">Advanced OSINT for Everyone.<br> <span
+                style="font-size: 0.8em; opacity: 0.7;">Developed by Pratyush Kumar Behera</span></p>
+          </div>
+
+          <!-- Main Card -->
+          <div class="card mb-6">
+            <!-- Keywords -->
+            <div class="mb-4">
+              <label class="input-label">Search Keywords</label>
+              <div class="input-container">
+                <input type="text" id="keywords" class="input input-lg" placeholder="Enter your search terms...">
+              </div>
+            </div>
+
+
+            <!-- Content Type & Engine -->
+            <div class="input-group-row">
+              <div>
+                <label class="input-label">Content Type</label>
+                <select id="contentType" class="input">
+                  <option value="all">All Content</option>
+                  <option value="videos">Videos</option>
+                  <option value="documents">Documents</option>
+                  <option value="audio">Audio</option>
+                  <option value="software">Software</option>
+                  <option value="images">Images</option>
+                  <option value="archives">Archives</option>
+                </select>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="downloadFocus" class="checkbox-input">
+                  <span class="checkbox-text">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      style="margin-right: 4px; color: var(--color-primary);">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Focus on Download Pages
+                  </span>
+                </label>
+              </div>
+              <div>
+                <label class="input-label">Search Engine</label>
+                <select id="searchEngine" class="input">
+                  <optgroup label="Primary">
+                    <option value="google">Google</option>
+                    <option value="bing">Bing</option>
+                    <option value="yahoo">Yahoo</option>
+                  </optgroup>
+                  <optgroup label="Privacy-Focused">
+                    <option value="duckduckgo">DuckDuckGo</option>
+                    <option value="startpage">Startpage</option>
+                    <option value="brave">Brave Search</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <!-- Advanced Options -->
+            <details class="mb-4">
+              <summary class="advanced-summary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                  </path>
+                </svg>
+                Advanced Options
+              </summary>
+              <div class="advanced-content">
+                <div>
+                  <label class="input-label">File Extension</label>
+                  <select id="fileFormat" class="input">
+                    <option value="any">Any Format</option>
+                    <option value="pdf">PDF</option>
+                    <option value="doc">DOC</option>
+                    <option value="mp4">MP4</option>
+                    <option value="mp3">MP3</option>
+                    <option value="zip">ZIP</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="input-label">Target Website</label>
+                  <div class="input-container">
+                    <input type="text" id="websiteScope" class="input" placeholder="example.com">
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- Terminal Preview -->
+            <div class="terminal-box terminal-box-mb" id="queryPreviewBox">
+              <div id="queryPreview" class="terminal-text">
+                <span style="color: var(--color-text-dim);">Configure options to generate query...</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="action-buttons-row">
+              <button id="copyQuery" class="btn btn-secondary liquid-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy Query
+              </button>
+              <button id="openInGoogle" class="btn btn-primary liquid-btn liquid-btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro Mode -->
+      <div id="proMode" class="mode-content" style="display: none;">
+
+        <!-- Warning -->
+        <div class="warning-banner">
+          <p class="warning-text">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; color: var(--color-warning);">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            For authorized security testing only. Unauthorized access is illegal.
+          </p>
+        </div>
+
+        <div class="pro-layout">
+
+          <!-- Sidebar -->
+          <aside class="pro-sidebar">
+            <div class="card">
+              <h3 class="sidebar-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  style="margin-bottom: -3px; margin-right: 4px; color: var(--color-primary);">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Filters
+              </h3>
+
+              <!-- Search -->
+              <div class="mb-4">
+                <label class="input-label">Search Dorks</label>
+                <input type="text" id="searchDorks" class="input" placeholder="Search...">
+              </div>
+
+              <!-- Target Domain -->
+              <div class="mb-4">
+                <label class="input-label">Target Domain</label>
+                <div class="input-container">
+                  <input type="text" id="targetDomain" class="input" placeholder="example.com">
+                </div>
+                <p class="input-note">Replaces [domain] in queries</p>
+              </div>
+
+              <!-- Category -->
+              <div class="mb-4">
+                <label class="input-label">Category</label>
+                <select id="categoryFilter" class="input">
+                  <option value="all">All Categories</option>
+                  <option value="Reconnaissance">Reconnaissance</option>
+                  <option value="Sensitive Files">Sensitive Files</option>
+                  <option value="Authentication">Authentication</option>
+                  <option value="SQL Injection">SQL Injection</option>
+                  <option value="XSS">XSS</option>
+                  <option value="LFI/RFI">LFI/RFI</option>
+                  <option value="Intelligence">Intelligence</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                </select>
+              </div>
+
+              <!-- Risk Level -->
+              <div class="mb-4">
+                <label class="input-label">Risk Level</label>
+                <select id="riskFilter" class="input">
+                  <option value="all">All Levels</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+
+              <!-- Phase -->
+              <div class="mb-4">
+                <label class="input-label">Attack Phase</label>
+                <div class="phase-tabs">
+                  <button class="btn btn-ghost nav-tab active phase-tab-btn liquid-btn" data-phase="all">All
+                    Phases</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="1">1: Recon</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="2">2: Files</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="3">3: Auth</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="4">4: Vulns</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="5">5: Intel</button>
+                  <button class="btn btn-ghost nav-tab phase-tab-btn liquid-btn" data-phase="6">6: Infra</button>
+                </div>
+              </div>
+
+              <button id="exportDorks" class="btn btn-secondary w-full liquid-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export
+              </button>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <div class="pro-main">
+            <!-- Stats Dashboard -->
+            <div id="statsDashboard" class="stats-dashboard mb-4">
+              <!-- Stats populated here -->
+            </div>
+
+            <!-- Results Bar -->
+            <div class="results-bar">
+              <span id="resultsCount" class="results-count">Loading dorks...</span>
+              <button id="clearFilters" class="btn btn-ghost btn-sm">Clear Filters</button>
+            </div>
+
+            <!-- Dorks Grid -->
+            <div id="dorksContainer" class="grid grid-2">
+              <!-- Dorks loaded here -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Floating Action Menu (Apple Liquid Glass) -->
+  <div class="fab-container">
+    <div class="fab-menu" id="fabMenu">
+      <a href="https://github.com/Pratyush-Kumar-Behera" target="_blank" class="fab-item" aria-label="Profile"
+        title="Developer Profile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="https://github.com/Pratyush-Kumar-Behera/OmniDork" target="_blank" class="fab-item"
+        aria-label="Source Code" title="Source Code">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <button class="fab-main" id="fabToggle" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+  </div>
+
+  <script src="./assets/js/dorks-data.js"></script>
+  <script src="./assets/js/core.js"></script>
+  <script src="./assets/js/dork-engine.js"></script>
+  <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

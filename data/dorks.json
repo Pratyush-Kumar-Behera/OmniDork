@@ -1,0 +1,354 @@
+{
+  "dorks": [
+    {
+      "id": "AD-001",
+      "phase": 1,
+      "title": "Subdomain Enumeration via Site Operator",
+      "query": "site:*.target.com",
+      "risk": "Low",
+      "category": "Reconnaissance",
+      "description": "Discovers indexed subdomains of the target domain",
+      "defensive_note": "Monitor which subdomains are publicly indexed. Remove staging/dev environments from search engine indexing."
+    },
+    {
+      "id": "AD-002",
+      "phase": 1,
+      "title": "Related Domains and Mirrors",
+      "query": "related:target.com",
+      "risk": "Low",
+      "category": "Reconnaissance",
+      "description": "Finds websites related to the target domain",
+      "defensive_note": "Be aware of unofficial mirrors or phishing sites impersonating your domain."
+    },
+    {
+      "id": "AD-003",
+      "phase": 1,
+      "title": "Cached Pages Discovery",
+      "query": "cache:target.com",
+      "risk": "Low",
+      "category": "Reconnaissance",
+      "description": "Views Google's cached version of web pages",
+      "defensive_note": "Ensure sensitive content is properly secured as cached versions may persist."
+    },
+    {
+      "id": "SF-001",
+      "phase": 2,
+      "title": "Exposed PDF Documents",
+      "query": "site:target.com ext:pdf",
+      "risk": "Medium",
+      "category": "Documents",
+      "description": "Finds publicly indexed PDF files that may contain sensitive information",
+      "defensive_note": "Audit all PDFs on your domain. Implement authentication or add robots.txt exclusions for sensitive documents."
+    },
+    {
+      "id": "SF-002",
+      "phase": 2,
+      "title": "Excel Spreadsheets Exposure",
+      "query": "site:target.com ext:xlsx OR ext:xls",
+      "risk": "High",
+      "category": "Documents",
+      "description": "Discovers Excel files that may contain financial data, user lists, or business intelligence",
+      "defensive_note": "Never store sensitive spreadsheets in publicly accessible locations. Use proper access controls."
+    },
+    {
+      "id": "SF-003",
+      "phase": 2,
+      "title": "SQL Database Dumps",
+      "query": "site:target.com ext:sql",
+      "risk": "Critical",
+      "category": "Database",
+      "description": "Finds SQL dump files that may contain complete database exports",
+      "defensive_note": "Immediately remove any SQL files from web-accessible directories. Never commit database dumps to public repos."
+    },
+    {
+      "id": "SF-004",
+      "phase": 2,
+      "title": "Configuration Files - .env",
+      "query": "site:target.com ext:env",
+      "risk": "Critical",
+      "category": "Configuration",
+      "description": "Discovers environment configuration files containing API keys, passwords, and secrets",
+      "defensive_note": "Add .env files to .gitignore and web server deny rules. Rotate any exposed credentials immediately."
+    },
+    {
+      "id": "SF-005",
+      "phase": 2,
+      "title": "Configuration Files - config.php",
+      "query": "site:target.com inurl:config.php",
+      "risk": "Critical",
+      "category": "Configuration",
+      "description": "Finds PHP configuration files that may expose database credentials and application settings",
+      "defensive_note": "Store config files outside web root or use .htaccess to block direct access."
+    },
+    {
+      "id": "SF-006",
+      "phase": 2,
+      "title": "Backup Files",
+      "query": "site:target.com ext:bak OR ext:backup OR ext:old",
+      "risk": "High",
+      "category": "Backups",
+      "description": "Locates backup files that may contain outdated code or sensitive data",
+      "defensive_note": "Never store backups in web-accessible directories. Use automated cleanup scripts."
+    },
+    {
+      "id": "SF-007",
+      "phase": 2,
+      "title": "Log Files Exposure",
+      "query": "site:target.com ext:log",
+      "risk": "High",
+      "category": "Logs",
+      "description": "Discovers log files that may reveal system paths, errors, and user activities",
+      "defensive_note": "Store logs outside web root and implement log rotation. Ensure logs don't contain sensitive data."
+    },
+    {
+      "id": "SF-008",
+      "phase": 2,
+      "title": "Password Files",
+      "query": "site:target.com intext:\"password\" ext:txt",
+      "risk": "Critical",
+      "category": "Credentials",
+      "description": "Searches for text files containing password information",
+      "defensive_note": "Use password management tools. Never store passwords in plain text files."
+    },
+    {
+      "id": "SF-009",
+      "phase": 2,
+      "title": "WordPress Config Files",
+      "query": "site:target.com inurl:wp-config.php",
+      "risk": "Critical",
+      "category": "Configuration",
+      "description": "Finds WordPress configuration files containing database credentials",
+      "defensive_note": "Ensure wp-config.php is not web-accessible. Use proper file permissions (644 or restrictive)."
+    },
+    {
+      "id": "SF-010",
+      "phase": 2,
+      "title": "SSH Private Keys",
+      "query": "site:target.com ext:pem OR ext:key OR ext:ppk",
+      "risk": "Critical",
+      "category": "Credentials",
+      "description": "Locates SSH private key files",
+      "defensive_note": "Never upload private keys to web servers. Rotate exposed keys immediately."
+    },
+    {
+      "id": "AS-001",
+      "phase": 3,
+      "title": "Admin Login Panels",
+      "query": "site:target.com inurl:admin OR inurl:login OR inurl:administrator",
+      "risk": "Medium",
+      "category": "Authentication",
+      "description": "Discovers administrative login interfaces",
+      "defensive_note": "Implement rate limiting, CAPTCHA, and use non-standard admin URLs. Enable MFA."
+    },
+    {
+      "id": "AS-002",
+      "phase": 3,
+      "title": "PHP Admin Panels",
+      "query": "site:target.com inurl:admin.php OR inurl:login.php",
+      "risk": "Medium",
+      "category": "Authentication",
+      "description": "Finds PHP-based admin panels",
+      "defensive_note": "Use strong authentication, implement IP whitelisting for admin areas."
+    },
+    {
+      "id": "AS-003",
+      "phase": 3,
+      "title": "WordPress Admin Login",
+      "query": "site:target.com inurl:wp-admin",
+      "risk": "Medium",
+      "category": "Authentication",
+      "description": "Locates WordPress admin login pages",
+      "defensive_note": "Change default admin URL, use security plugins, enable two-factor authentication."
+    },
+    {
+      "id": "AS-004",
+      "phase": 3,
+      "title": "CPanel and WHM Access",
+      "query": "site:target.com inurl:cpanel OR inurl:whm",
+      "risk": "High",
+      "category": "Authentication",
+      "description": "Discovers hosting control panel interfaces",
+      "defensive_note": "Restrict cPanel access to specific IPs, use strong passwords and SSL certificates."
+    },
+    {
+      "id": "AS-005",
+      "phase": 3,
+      "title": "phpMyAdmin Interfaces",
+      "query": "site:target.com inurl:phpmyadmin",
+      "risk": "High",
+      "category": "Authentication",
+      "description": "Finds phpMyAdmin database management interfaces",
+      "defensive_note": "Protect phpMyAdmin with additional authentication, use non-standard URLs, IP restrictions."
+    },
+    {
+      "id": "AS-006",
+      "phase": 3,
+      "title": "Test and Staging Environments",
+      "query": "site:target.com inurl:test OR inurl:staging OR inurl:dev",
+      "risk": "Medium",
+      "category": "Testing",
+      "description": "Locates development and testing environments that may have weak security",
+      "defensive_note": "Remove or secure test environments. Add authentication and remove from search indexing."
+    },
+    {
+      "id": "EM-001",
+      "phase": 4,
+      "title": "SQL Error Messages",
+      "query": "site:target.com intext:\"SQL syntax\" OR intext:\"mysql_fetch\"",
+      "risk": "High",
+      "category": "Errors",
+      "description": "Finds pages displaying SQL error messages revealing database structure",
+      "defensive_note": "Disable detailed error messages in production. Log errors server-side only."
+    },
+    {
+      "id": "EM-002",
+      "phase": 4,
+      "title": "PHP Error Messages",
+      "query": "site:target.com intext:\"Warning: include\" OR intext:\"Fatal error\"",
+      "risk": "Medium",
+      "category": "Errors",
+      "description": "Discovers pages showing PHP errors revealing file paths and code issues",
+      "defensive_note": "Set display_errors = Off in production php.ini. Use error_log for debugging."
+    },
+    {
+      "id": "EM-003",
+      "phase": 4,
+      "title": "Stack Traces",
+      "query": "site:target.com intext:\"stack trace\" OR intext:\"traceback\"",
+      "risk": "Medium",
+      "category": "Errors",
+      "description": "Finds detailed error stack traces exposing application internals",
+      "defensive_note": "Disable verbose error output. Implement custom error pages."
+    },
+    {
+      "id": "EM-004",
+      "phase": 4,
+      "title": "Directory Listings",
+      "query": "site:target.com intitle:\"Index of /\"",
+      "risk": "High",
+      "category": "Misconfiguration",
+      "description": "Discovers directories with directory listing enabled",
+      "defensive_note": "Disable directory browsing in web server config (Options -Indexes for Apache)."
+    },
+    {
+      "id": "EM-005",
+      "phase": 4,
+      "title": "Apache Server Status",
+      "query": "site:target.com inurl:server-status",
+      "risk": "High",
+      "category": "Misconfiguration",
+      "description": "Finds exposed Apache server status pages",
+      "defensive_note": "Restrict access to server-status or disable the module entirely."
+    },
+    {
+      "id": "CL-001",
+      "phase": 5,
+      "title": "Exposed Git Repositories",
+      "query": "site:target.com inurl:.git",
+      "risk": "Critical",
+      "category": "Version Control",
+      "description": "Discovers accessible .git directories containing complete source code history",
+      "defensive_note": "Never deploy .git folders to production. Add deny rules in web server config."
+    },
+    {
+      "id": "CL-002",
+      "phase": 5,
+      "title": "GitHub References",
+      "query": "site:github.com \"target.com\"",
+      "risk": "Medium",
+      "category": "Code Repositories",
+      "description": "Finds GitHub repositories mentioning the target domain",
+      "defensive_note": "Monitor public repositories for leaked credentials or sensitive information."
+    },
+    {
+      "id": "CL-003",
+      "phase": 5,
+      "title": "Pastebin Leaks",
+      "query": "site:pastebin.com \"target.com\"",
+      "risk": "High",
+      "category": "Public Pastes",
+      "description": "Searches for information about target domain posted on Pastebin",
+      "defensive_note": "Monitor paste sites for credential dumps and data leaks."
+    },
+    {
+      "id": "CL-004",
+      "phase": 5,
+      "title": "API Keys in Code",
+      "query": "site:target.com \"api_key\" OR \"apikey\" OR \"api-key\"",
+      "risk": "Critical",
+      "category": "Credentials",
+      "description": "Searches for exposed API keys in accessible code or pages",
+      "defensive_note": "Use environment variables for API keys. Implement secrets management solutions."
+    },
+    {
+      "id": "CL-005",
+      "phase": 5,
+      "title": "Email Addresses Harvesting",
+      "query": "site:target.com intext:\"@target.com\"",
+      "risk": "Low",
+      "category": "OSINT",
+      "description": "Collects email addresses for social engineering or spam purposes",
+      "defensive_note": "Consider obfuscating email addresses or using contact forms instead."
+    },
+    {
+      "id": "CL-006",
+      "phase": 5,
+      "title": "AWS Keys Exposure",
+      "query": "site:target.com \"AKIA\" OR \"aws_access_key_id\"",
+      "risk": "Critical",
+      "category": "Credentials",
+      "description": "Searches for exposed AWS access keys",
+      "defensive_note": "Rotate exposed AWS keys immediately. Use AWS Secrets Manager or IAM roles."
+    },
+    {
+      "id": "SF-011",
+      "phase": 2,
+      "title": "Open Directory - Files",
+      "query": "intitle:\"Index of /\" \"Parent Directory\" \"Last modified\"",
+      "risk": "High",
+      "category": "Open Directories",
+      "description": "Finds open directories with file listings available for browsing",
+      "defensive_note": "Disable directory indexing in web server configuration."
+    },
+    {
+      "id": "SF-012",
+      "phase": 2,
+      "title": "Video Files Exposure",
+      "query": "site:target.com ext:mp4 OR ext:avi OR ext:mkv OR ext:flv",
+      "risk": "Medium",
+      "category": "Media",
+      "description": "Discovers video files that may be private or confidential",
+      "defensive_note": "Implement proper access controls for media files. Use CDN with authentication."
+    },
+    {
+      "id": "SF-013",
+      "phase": 2,
+      "title": "Audio Files Discovery",
+      "query": "site:target.com ext:mp3 OR ext:wav OR ext:flac",
+      "risk": "Low",
+      "category": "Media",
+      "description": "Finds audio files that may be publicly accessible",
+      "defensive_note": "Ensure audio content is intentionally public or properly secured."
+    },
+    {
+      "id": "SF-014",
+      "phase": 2,
+      "title": "Archive Files",
+      "query": "site:target.com ext:zip OR ext:rar OR ext:tar OR ext:gz",
+      "risk": "High",
+      "category": "Archives",
+      "description": "Locates compressed archives that may contain sensitive files",
+      "defensive_note": "Never store sensitive archives in web-accessible locations."
+    },
+    {
+      "id": "AD-004",
+      "phase": 1,
+      "title": "LinkedIn Organization Info",
+      "query": "site:linkedin.com \"target company\"",
+      "risk": "Low",
+      "category": "OSINT",
+      "description": "Finds LinkedIn profiles and company information for reconnaissance",
+      "defensive_note": "Be aware of public employee information that could aid social engineering."
+    }
+  ]
+}
